@@ -1,9 +1,9 @@
 /**** 
- * Created by: Your Name
+ * Created by: Professor Akram
  * Date Created: March 16, 2022
  * 
- * Last Edited by: NA
- * Last Edited: March 16, 2022
+ * Last Edited by: Camp Steiner
+ * Last Edited: March 21, 2022
  * 
  * Description: Hero ship controller
 ****/
@@ -89,10 +89,22 @@ public class Hero : MonoBehaviour
     }//end Start()
 
         // Update is called once per frame (page 551)
-        void Update()
+    void Update()
     {
 
         //player input
+        float xAxis = Input.GetAxis("Horizontal");
+        float yAxis = Input.GetAxis("Vertical");
+
+        //Change transform based on axis
+        Vector3 pos = transform.position;
+        pos.x += xAxis * speed * Time.deltaTime;
+        pos.y += yAxis * speed * Time.deltaTime;
+
+        transform.position = pos;
+
+        //Rotate ship to look cool
+        transform.rotation = Quaternion.Euler(yAxis * pitchMult, xAxis * rollMult, 0);
 
     }//end Update()
 

@@ -130,6 +130,14 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1200115686393472605, guid: a4c6588e02bf0e346b6784d1092bb7af, type: 3}
+      propertyPath: shieldColor.g
+      value: 0.94509804
+      objectReference: {fileID: 0}
+    - target: {fileID: 1200115686393472605, guid: a4c6588e02bf0e346b6784d1092bb7af, type: 3}
+      propertyPath: shieldColor.r
+      value: 0.14901961
+      objectReference: {fileID: 0}
     - target: {fileID: 6650417068716629928, guid: a4c6588e02bf0e346b6784d1092bb7af, type: 3}
       propertyPath: m_RootOrder
       value: 6
@@ -492,7 +500,6 @@ MonoBehaviour:
   defaultHighScore: 1000
   numberOfLives: 3
   resetLostLevel: 1
-  gameRestartDelay: 2
   defaultEndMessage: Game Over
   looseMessage: You Loose
   winMessage: You Win
