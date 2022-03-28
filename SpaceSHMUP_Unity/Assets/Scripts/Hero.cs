@@ -3,7 +3,7 @@
  * Date Created: March 16, 2022
  * 
  * Last Edited by: Camp Steiner
- * Last Edited: March 21, 2022
+ * Last Edited: March 28, 2022
  * 
  * Description: Hero ship controller
 ****/
@@ -112,9 +112,27 @@ public class Hero : MonoBehaviour
     //Taking Damage
     private void OnTriggerEnter(Collider other)
     {
-  
-
-
+        Ouchie(other);
     }//end OnTriggerEnter()
+    
+    public void Ouchie(Collider other)
+    {
+        Transform rootT = other.gameObject.transform.root;
 
+        GameObject go = rootT.gameObject;
+
+        //make sure the same enemy cannot damage you twice
+        if (go == lastTriggerGo) return;
+        lastTriggerGo = go;
+        if(go.tag == "Enemy")
+        { 
+            Debug.Log("ouch that's a " + other);
+            shieldLevel -= 1;
+            Destroy(go);
+        }
+        else
+        {
+            Debug.Log("hello there little " + other);
+        }
+    }
 }
