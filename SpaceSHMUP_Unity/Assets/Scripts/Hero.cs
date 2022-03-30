@@ -45,8 +45,11 @@ public class Hero : MonoBehaviour
     public float pitchMult = 30;
 
 
-
     [Space(10)]
+
+    [Header("Projectile Settings")]
+    public GameObject projectilePrefab;
+    public float projectileSpeed;
 
     private GameObject lastTriggerGo; //reference to the last triggering game object
    
@@ -106,8 +109,18 @@ public class Hero : MonoBehaviour
         //Rotate ship to look cool
         transform.rotation = Quaternion.Euler(yAxis * pitchMult, xAxis * rollMult, 0);
 
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            TempFire();
+        }
+
     }//end Update()
 
+    public void TempFire()
+    {
+        GameObject proj = Instantiate<GameObject>(projectilePrefab, transform.position, Quaternion.identity);
+        proj.GetComponent<Rigidbody>().velocity = Vector3.up * projectileSpeed;
+    }
 
     //Taking Damage
     private void OnTriggerEnter(Collider other)
@@ -134,5 +147,10 @@ public class Hero : MonoBehaviour
         {
             Debug.Log("hello there little " + other);
         }
+    }
+
+    public void AddToScore(int val)
+    {
+        gm.UpdateScore(val);
     }
 }

@@ -2,8 +2,8 @@
  * Created by: Akram Taghavi-Burris
  * Date Created: March 16, 2022
  * 
- * Last Edited by: NA
- * Last Edited: March 16, 2022
+ * Last Edited by: Camp Steiner
+ * Last Edited: March 30, 2022
  * 
  * Description: Enemy controler
 ****/
@@ -64,5 +64,16 @@ public class Enemy : MonoBehaviour
         Vector3 tmpPos = pos;
         tmpPos.y -= speed * Time.deltaTime; //move down
         pos = tmpPos;
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        GameObject o = collision.gameObject;
+        if(o.tag == "ProjectileHero") //if a bullet touches the enemy
+        {
+            Hero.SHIP.AddToScore(score); //increase score
+            Destroy(o);
+            Destroy(gameObject); //destroy the projectile and the enemy
+        }
     }
 }
