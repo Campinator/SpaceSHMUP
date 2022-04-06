@@ -111,12 +111,12 @@ public class Hero : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            TempFire();
+            FireProjectile();
         }
 
     }//end Update()
 
-    public void TempFire()
+    public void FireProjectile()
     {
         GameObject proj = Instantiate<GameObject>(projectilePrefab, transform.position, Quaternion.identity);
         proj.GetComponent<Rigidbody>().velocity = Vector3.up * projectileSpeed;

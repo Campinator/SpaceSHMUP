@@ -1,3 +1,13 @@
+/**** 
+ * Created by: Camp Steiner
+ * Date Created: April 6, 2022
+ * 
+ * Last Edited by: Camp Steiner
+ * Last Edited: April 6, 2022
+ * 
+ * Description: Behavior for the projectile
+****/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
