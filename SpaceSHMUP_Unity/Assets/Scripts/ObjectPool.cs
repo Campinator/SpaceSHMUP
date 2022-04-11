@@ -23,6 +23,7 @@ public class ObjectPool : MonoBehaviour
     #endregion
 
     private Queue<GameObject> projectiles = new Queue<GameObject>(); //hold the projectiles
+
     [Header("Pool Settings")]
     public GameObject projectilePrefab;
     public int poolStartSize = 5;
@@ -35,12 +36,32 @@ public class ObjectPool : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        for (int i = 0; i < poolStartSize; i++)
+        {
+            GameObject projectileGO = Instantiate(projectilePrefab);
+            projectiles.Enqueue(projectileGO);
+            projectileGO.SetActive(false);
+        }
     }
 
     // Update is called once per frame
-    void Update()
+    public GameObject GetObject() //get the first object from the queue
     {
-        
+        if (projectiles.Count > 0)
+        {
+            GameObject go = projectiles.Dequeue();
+            go.SetActive(true);
+            return go;
+        }
+        else{
+            Debug.LogWarning("Out of Objects");
+            return null;
+        }
+    }
+
+    public void ReturnObject(GameObject go) //put item back in the queue
+    {
+        projectiles.Enqueue(go);
+        go.SetActive(false);
     }
 }

@@ -3,7 +3,7 @@
  * Date Created: March 16, 2022
  * 
  * Last Edited by: Camp Steiner
- * Last Edited: March 28, 2022
+ * Last Edited: April 11, 2022
  * 
  * Description: Hero ship controller
 ****/
@@ -38,6 +38,7 @@ public class Hero : MonoBehaviour
     #endregion
 
     GameManager gm; //reference to game manager
+    ObjectPool op; //reference to objectpool
 
     [Header("Ship Movement")]
     public float speed = 10;
@@ -48,8 +49,9 @@ public class Hero : MonoBehaviour
     [Space(10)]
 
     [Header("Projectile Settings")]
-    public GameObject projectilePrefab;
     public float projectileSpeed;
+    public AudioClip sounding;
+    public AudioSource sounder;
 
     private GameObject lastTriggerGo; //reference to the last triggering game object
    
@@ -89,6 +91,8 @@ public class Hero : MonoBehaviour
     private void Start()
     {
         gm = GameManager.GM; //find the game manager
+        op = ObjectPool.POOL;
+        sounder = GetComponent<AudioSource>();
     }//end Start()
 
         // Update is called once per frame (page 551)
@@ -118,8 +122,14 @@ public class Hero : MonoBehaviour
 
     public void FireProjectile()
     {
-        GameObject proj = Instantiate<GameObject>(projectilePrefab, transform.position, Quaternion.identity);
-        proj.GetComponent<Rigidbody>().velocity = Vector3.up * projectileSpeed;
+        GameObject proj = op.GetObject();
+        if(proj != null) {
+            proj.transform.position = gameObject.transform.position; //set position
+            proj.GetComponent<Rigidbody>().velocity = Vector3.up * projectileSpeed; //and speed
+
+            //make sounds
+            sounder?.PlayOneShot(sounding);
+        }
     }
 
     //Taking Damage
@@ -139,13 +149,13 @@ public class Hero : MonoBehaviour
         lastTriggerGo = go;
         if(go.tag == "Enemy")
         { 
-            Debug.Log("ouch that's a " + other);
+            //Debug.Log("ouch that's a " + other);
             shieldLevel -= 1;
             Destroy(go);
         }
         else
         {
-            Debug.Log("hello there little " + other);
+            //Debug.Log("hello there little " + other);
         }
     }
 
