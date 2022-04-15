@@ -688,8 +688,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameState: 0
-  gameTitle: Untitled Game
-  gameCredits: Made by Me
+  gameTitle: Space SHMUP
+  gameCredits: Camp Steiner
   copyrightDate: Copyright 2022
   recordHighScore: 1
   defaultHighScore: 1000
@@ -698,7 +698,7 @@ MonoBehaviour:
   gameResetDelay: 2
   bgMusic: {fileID: 8300000, guid: 0906599c6eeb54c499ba376ba8875a74, type: 3}
   defaultEndMessage: Game Over
-  looseMessage: You Loose
+  looseMessage: You Lose
   winMessage: You Win
   endMsg: 
   startScene: start_scene
